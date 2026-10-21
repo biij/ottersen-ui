@@ -13,6 +13,10 @@ All components take their text as props, so each app can use its own translation
 
 ## Usage
 
+```
+npm install @ottersen/ui
+```
+
 ```tsx
 // main.tsx
 import { createColorSchemeStore } from '@ottersen/ui'
@@ -44,7 +48,13 @@ npm run lint
 npm run typecheck
 ```
 
-Until the package is published to npm, apps link it from a local folder (`"@ottersen/ui": "file:../../ottersen-ui"`) and dedupe React in their Vite config (`resolve.dedupe: ['react', 'react-dom']`). Run `npm run dev` here to see changes in the app while you work.
+To try changes in an app before publishing, link this folder into the app (`npm link ../path/to/ottersen-ui` in the app) and run `npm run dev` here. The app should dedupe React in its Vite config (`resolve.dedupe: ['react', 'react-dom']`), since the linked folder has its own copy.
+
+## Publishing
+
+1. Bump the version in `package.json` (semver: patch for fixes, minor for new components, major for breaking changes).
+2. `npm publish`. It runs typecheck, lint and build first, and asks for 2FA in the browser.
+3. Commit and push the version bump, and update the version in the apps that should use it.
 
 ## Conventions
 
