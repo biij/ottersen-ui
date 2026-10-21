@@ -1,0 +1,83 @@
+/*
+  Design tokens for the "calm" style direction, light and dark variants
+  selected via [data-color-scheme] on <html>. Contrast-checked (WCAG AA,
+  4.5:1+) as a starting point — re-verify with a contrast checker before
+  treating as final. --color-accent stays the same across modes since it's
+  only ever used as a button background (contrast is against
+  --color-accent-contrast, not the page background). It is NOT safe as a
+  text color (~5.75:1 in light mode, ~3.11:1 in dark mode — dark mode fails
+  AA). Use --color-accent-text for accent-colored text/labels instead —
+  same hue, tuned per mode for WCAG AAA (7:1+) against --color-bg. Same
+  story for --color-error (~6.54:1 light, ~6.44:1 dark — passes AA, not
+  AAA): use --color-error-text for error-colored text (buttons, messages).
+  --color-success-text and --color-warning-text follow the same pattern
+  (AAA-checked text colors, ~7.7-9.7:1 against both --color-bg and
+  --color-surface) — for status color-coding (e.g. success/warning/error).
+*/
+
+:root[data-color-scheme='light'] {
+  --color-bg: #ffffff;
+  --color-surface: #f7f7f8;
+  --color-text: #3f3d45;
+  --color-text-heading: #16151a;
+  --color-accent: #3b6e71;
+  --color-accent-contrast: #ffffff;
+  --color-accent-text: #254749;
+  /* A light tint of --color-accent rather than a neutral surface — used
+     where a banner needs to stand out as "brand-colored" against ordinary
+     page content (e.g. an install prompt). --color-accent-text's
+     7:1+ AAA contrast against --color-bg barely moves against this tint
+     (still light), so it stays legible on top of it. */
+  --color-accent-surface: #e7eeee;
+  --color-accent-surface-border: #c4d4d4;
+  --color-border: #e2e1e5;
+  --color-error: #b3261e;
+  --color-error-text: #8f1c16;
+  --color-success-text: #0f5c24;
+  --color-warning-text: #714b00;
+  --radius: 4px;
+}
+
+:root[data-color-scheme='dark'] {
+  --color-bg: #16171d;
+  --color-surface: #1f2028;
+  --color-text: #b8b6bd;
+  --color-text-heading: #f3f4f6;
+  --color-accent: #3b6e71;
+  --color-accent-contrast: #ffffff;
+  --color-accent-text: #7bbdc0;
+  /* Dark-mode counterpart: a dark tint of --color-accent rather than a
+     lighter one, matching how --color-surface is darker than --color-bg
+     here too, not lighter. */
+  --color-accent-surface: #1d282e;
+  --color-accent-surface-border: #253a3f;
+  --color-border: #2e303a;
+  --color-error: #ff6b6b;
+  --color-error-text: #ff9d9d;
+  --color-success-text: #7bc98c;
+  --color-warning-text: #e8b84b;
+  --radius: 4px;
+}
+
+:root {
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+}
+
+/* Scaled down for a phone screen so every page/component using these
+   tokens gets tighter mobile spacing for free, with no per-component
+   changes needed — includes --space-2/3 (label/value rows, form field
+   gaps), not just the two largest steps. --space-1 is left alone; 4px is
+   already close to the floor. */
+@media (max-width: 600px) {
+  :root {
+    --space-2: 6px;
+    --space-3: 12px;
+    --space-4: 18px;
+    --space-5: 28px;
+  }
+}

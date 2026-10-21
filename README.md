@@ -1,0 +1,54 @@
+# @ottersen/ui
+
+Shared React components, design tokens and preferences for the Ottersen.tech apps (Attend, Locate, Memories). Extracted from Attend.
+
+## What's in it
+
+- **Styles:** design tokens (light/dark colors, spacing, radius) and base styles, in `@ottersen/ui/styles.css`
+- **Components:** `AppHeader`, `Button`, `Dialog`, `InfoTooltip`, `Menu`, `PageLayout`, `SettingsModal`, `Spinner`
+- **Form fields:** `TextField`, `TextAreaField`, `NumberField`, `CheckboxField`, `RadioGroupField`, `FieldError`, `RequiredMark`
+- **Preferences:** `createColorSchemeStore` (light/dark/follow device) and `createLocalePreferenceStore` (nb/en/follow device)
+
+All components take their text as props, so each app can use its own translation setup (e.g. react-i18next).
+
+## Usage
+
+```tsx
+// main.tsx
+import { createColorSchemeStore } from '@ottersen/ui'
+export const colorScheme = createColorSchemeStore('myapp-color-scheme')
+colorScheme.init()
+```
+
+```css
+/* index.css */
+@import '@ottersen/ui/styles.css';
+
+/* App-specific overrides go below, e.g. a different accent color */
+:root[data-color-scheme='light'] {
+  --color-accent: #3b6e71;
+}
+```
+
+```tsx
+import { Button, Dialog } from '@ottersen/ui'
+```
+
+## Development
+
+```
+npm install
+npm run build      # dist/: index.js, type declarations and styles
+npm run dev        # rebuild on change
+npm run lint
+npm run typecheck
+```
+
+Until the package is published to npm, apps link it from a local folder (`"@ottersen/ui": "file:../../ottersen-ui"`) and dedupe React in their Vite config (`resolve.dedupe: ['react', 'react-dom']`). Run `npm run dev` here to see changes in the app while you work.
+
+## Conventions
+
+- Generic only. Anything tied to one app's features stays in that app.
+- No hard-coded text: labels come in as props.
+- Styles inline with CSS variables from the tokens. Only what inline styles can't express (`:hover`, media queries, keyframes) goes in `base.css`, with class names prefixed `ou-`.
+- WCAG 2.2 AA, with AAA (7:1) contrast for text colors.
