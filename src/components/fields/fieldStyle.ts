@@ -15,8 +15,11 @@ export const fieldStyle = {
   boxSizing: 'border-box' as const,
 }
 
+// Replaces the whole `border` shorthand rather than adding `borderColor` on
+// top of it: React can't cleanly remove a longhand that overrides a
+// shorthand, so the red border could stay after the error was fixed.
 export function fieldStyleWithError(hasError: boolean) {
-  return hasError ? { ...fieldStyle, borderColor: 'var(--color-error)' } : fieldStyle
+  return hasError ? { ...fieldStyle, border: '1px solid var(--color-error)' } : fieldStyle
 }
 
 // A <select>'s native dropdown arrow renders inside fieldStyle's normal 10px
