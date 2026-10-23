@@ -9,6 +9,7 @@ export { SettingsModal, type SettingsCategory } from './components/SettingsModal
 export { Spinner } from './components/Spinner'
 
 export { CheckboxField } from './components/fields/CheckboxField'
+export { DateField, type DateFieldLabels } from './components/fields/DateField'
 export { FieldError } from './components/fields/FieldError'
 export { fieldStyle, fieldStyleWithError, selectFieldStyle } from './components/fields/fieldStyle'
 export { NumberField } from './components/fields/NumberField'
