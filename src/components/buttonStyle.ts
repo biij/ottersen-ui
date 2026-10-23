@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link'
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'link' | 'danger' | 'danger-secondary'
 export type ButtonSize = 'md' | 'sm'
 
 const base: CSSProperties = {
@@ -42,6 +42,22 @@ const variantStyle: Record<ButtonVariant, CSSProperties> = {
     background: 'transparent',
     color: 'var(--color-accent-text)',
     textDecoration: 'underline',
+  },
+  // For destructive actions, e.g. the "Delete" that confirms a deletion.
+  // Uses --color-error-text rather than --color-error, which only reaches
+  // AA: 8.95:1 light and 8.99:1 dark against the text.
+  danger: {
+    border: 'none',
+    background: 'var(--color-error-text)',
+    color: 'var(--color-bg)',
+  },
+  // The lower-emphasis destructive button, e.g. the "Delete…" that opens
+  // the confirmation: outlined, with error-colored text (8.36:1 light,
+  // 8.15:1 dark even on --color-surface).
+  'danger-secondary': {
+    border: '1px solid var(--color-border)',
+    background: 'transparent',
+    color: 'var(--color-error-text)',
   },
 }
 
