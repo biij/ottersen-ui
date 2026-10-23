@@ -37,7 +37,10 @@ export function TextAreaField({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         maxLength={maxLength}
-        style={fieldStyleWithError(!!error)}
+        // Taller or shorter only: dragging it wider breaks the form layout,
+        // and on a phone pushes it off the screen. The min height keeps at
+        // least one line visible.
+        style={{ ...fieldStyleWithError(!!error), resize: 'vertical', minHeight: 44 }}
         aria-invalid={!!error}
         aria-describedby={[error ? errorId : null, maxLength ? counterId : null].filter(Boolean).join(' ') || undefined}
       />
