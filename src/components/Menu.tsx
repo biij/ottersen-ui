@@ -1,9 +1,12 @@
-import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
+import { Fragment, useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 
 export interface MenuItem {
   key: string
   label: string
   onSelect: () => void
+  // Draws a line above this item, to set apart a different kind of item
+  // (e.g. Settings below the app's pages).
+  separatorBefore?: boolean
 }
 
 // Dropdown menu built on <details>/<summary>. Controlled (open/onOpenChange)
@@ -98,27 +101,31 @@ export function Menu({
         }}
       >
         {items.map((item) => (
-          <button
-            key={item.key}
-            type="button"
-            role="menuitem"
-            onClick={() => {
-              onOpenChange(false)
-              item.onSelect()
-            }}
-            style={{
-              padding: '8px 12px',
-              borderRadius: 'var(--radius)',
-              border: 'none',
-              background: 'transparent',
-              color: 'var(--color-text-heading)',
-              fontSize: 'inherit',
-              textAlign: 'left',
-              cursor: 'pointer',
-            }}
-          >
-            {item.label}
-          </button>
+          <Fragment key={item.key}>
+            {item.separatorBefore && (
+              <hr style={{ width: '100%', margin: '4px 0', border: 'none', borderTop: '1px solid var(--color-border)' }} />
+            )}
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => {
+                onOpenChange(false)
+                item.onSelect()
+              }}
+              style={{
+                padding: '8px 12px',
+                borderRadius: 'var(--radius)',
+                border: 'none',
+                background: 'transparent',
+                color: 'var(--color-text-heading)',
+                fontSize: 'inherit',
+                textAlign: 'left',
+                cursor: 'pointer',
+              }}
+            >
+              {item.label}
+            </button>
+          </Fragment>
         ))}
       </div>
     </details>
