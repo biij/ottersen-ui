@@ -6,7 +6,7 @@ Shared React components, design tokens and preferences for the Ottersen.tech app
 
 - **Styles:** design tokens (light/dark colors, spacing, radius) and base styles, in `@ottersen/ui/styles.css`
 - **Components:** `AppHeader`, `Button`, `Dialog`, `InfoTooltip`, `Menu`, `PageLayout`, `SettingsModal`, `Spinner`
-- **Form fields:** `TextField`, `TextAreaField`, `NumberField`, `CheckboxField`, `RadioGroupField`, `FieldError`, `RequiredMark`
+- **Form fields:** `TextField`, `TextAreaField`, `NumberField`, `DateField` (typed in the app's date format, or picked from a calendar), `CheckboxField`, `RadioGroupField`, `FieldError`, `RequiredMark`
 - **Preferences:** `createColorSchemeStore` (light/dark/follow device) and `createLocalePreferenceStore` (nb/en/follow device)
 
 All components take their text as props, so each app can use its own translation setup (e.g. react-i18next).
